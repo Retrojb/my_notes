@@ -34,3 +34,21 @@ Global #errorHelpers with Uncaught Reference global is not defined on packages: 
 add this to the `polyfill.ts` file
 `(window as any)['global'] = window;`
 rebuild
+
+
+event emitter is a wrapper for the RxJS `Subject` class
+
+EventEmitter<T> extends Subject<T> { ... }
+
+RxJS Subject class => subject is an observable.
+subjects are subscribed to you have to provide an observable (recieves values normally)
+the subscribe doesn't invoke a new execution, just registers the observable.
+
+
+subscribtion is an obj, that represents a disposable resource (the observable execution).
+unSubscribe() no arguements required => releases resources / cancels the executed observable
+    take(n): emits N values before stopping the observable.
+    takeWhile(predicate): tests the emitted values against a predicate, if it returns `false`, it will complete.
+    first(): emits the first value and completes.
+    first(predicate): checks each value against a predicate function, if it returns `true`, the emits that value and completes.
+        * RxJS should use teakUntil(n) or takeWhile( if (condition > n) {x => x.unSubscribe()})
